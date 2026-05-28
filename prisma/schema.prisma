@@ -15,6 +15,12 @@ model User {
   role          String    @default("USER")
   accounts      Account[]
   sessions      Session[]
+  boardsCreated Board[]
+  posts         Post[]
+  comments      Comment[]
+  postLikes     PostLike[]
+  commentLikes  CommentLike[]
+  mediaAssets   MediaAsset[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
@@ -55,4 +61,112 @@ model VerificationToken {
   expires    DateTime
 
   @@id([identifier, token])
+}
+
+model Board {
+  id          String          @id @default(cuid())
+  name        String
+  slug        String          @unique
+  description String?
+  createdById String
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  createdBy   User            @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  categories  BoardCategory[]
+  posts       Post[]
+}
+
+model BoardCategory {
+  id        String   @id @default(cuid())
+  boardId   String
+  name      String
+  slug      String
+  sortOrder Int      @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  posts     Post[]
+
+  @@unique([boardId, slug])
+}
+
+model Post {
+  id          String    @id @default(cuid())
+  boardId     String
+  categoryId  String
+  authorId    String
+  title       String
+  content     String
+  deletedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  board       Board          @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  category    BoardCategory  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  author      User           @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  comments    Comment[]
+  likes       PostLike[]
+  media       MediaAsset[]
+}
+
+model Comment {
+  id         String    @id @default(cuid())
+  postId     String
+  authorId   String
+  parentId   String?
+  content    String
+  deletedAt  DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  post       Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author     User      @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  parent     Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies    Comment[] @relation("CommentReplies")
+  likes      CommentLike[]
+  media      MediaAsset[]
+}
+
+model PostLike {
+  id        String   @id @default(cuid())
+  postId    String
+  userId    String
+  createdAt DateTime @default(now())
+
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+}
+
+model CommentLike {
+  id        String   @id @default(cuid())
+  commentId String
+  userId    String
+  createdAt DateTime @default(now())
+
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([commentId, userId])
+}
+
+model MediaAsset {
+  id         String   @id @default(cuid())
+  ownerId    String
+  postId     String?
+  commentId  String?
+  kind       String
+  storageKey String?
+  url        String?
+  mimeType   String?
+  width      Int?
+  height     Int?
+  createdAt  DateTime @default(now())
+
+  owner      User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  post       Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  comment    Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
 }
