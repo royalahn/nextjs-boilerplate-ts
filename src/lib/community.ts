@@ -90,3 +90,63 @@ export async function getCommunityCategory(boardSlug: string, categorySlug: stri
 
   return { board, category, posts }
 }
+
+export async function getCommunityPost(
+  boardSlug: string,
+  categorySlug: string,
+  postId: string,
+) {
+  const slug = normalizeBoardSlug(boardSlug)
+  const categorySlugValue = normalizeCategorySlug(categorySlug)
+  const post = await db.post.findUnique({
+    where: { id: postId },
+    include: {
+      board: true,
+      category: true,
+      author: true,
+      likes: true,
+      media: true,
+      _count: {
+        select: {
+          comments: true,
+          likes: true,
+          media: true,
+        },
+      },
+    },
+  })
+
+  if (
+    !post ||
+    post.board.slug !== slug ||
+    post.category.slug !== categorySlugValue ||
+    post.deletedAt
+  ) {
+    return null
+  }
+
+  const comments = await db.comment.findMany({
+    where: {
+      postId: post.id,
+      parentId: null,
+      deletedAt: null,
+    },
+    orderBy: [{ createdAt: "asc" }],
+    include: {
+      author: true,
+      likes: true,
+      media: true,
+      replies: {
+        where: { deletedAt: null },
+        orderBy: [{ createdAt: "asc" }],
+        include: {
+          author: true,
+          likes: true,
+          media: true,
+        },
+      },
+    },
+  })
+
+  return { board: post.board, category: post.category, post, comments }
+}
