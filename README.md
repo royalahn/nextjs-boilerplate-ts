@@ -75,7 +75,9 @@ src/
 │   ├── (auth)/login/          # 로그인 페이지
 │   ├── (dashboard)/           # 인증 필요 영역
 │   │   ├── layout.tsx         # 사이드바 레이아웃
-│   │   └── dashboard/         # 대시보드 홈
+│   │   ├── dashboard/         # 대시보드 홈
+│   │   ├── community/         # 커뮤니티(게시판/글/댓글)
+│   │   └── admin/boards/      # 관리자 게시판 관리
 │   └── api/auth/[...nextauth] # Auth.js 핸들러
 ├── components/
 │   ├── ui/                    # shadcn 컴포넌트
