@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
@@ -22,10 +23,15 @@ interface BoardListProps {
 }
 
 export function BoardList({ boards }: BoardListProps) {
+  const tints = ["bg-[#fff6c7]", "bg-[#dff6f1]", "bg-[#ffe5de]", "bg-[#f4ecff]"]
+
   return (
     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-      {boards.map((board) => (
-        <Card key={board.id} className="overflow-hidden">
+      {boards.map((board, index) => (
+        <Card
+          key={board.id}
+          className={`overflow-hidden border-black/10 ${tints[index % tints.length]}`}
+        >
           <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div className="space-y-1">
@@ -45,12 +51,9 @@ export function BoardList({ boards }: BoardListProps) {
                 </Badge>
               ))}
             </div>
-            <Link
-              href={`/community/${board.slug}`}
-              className="inline-flex text-sm font-medium text-primary hover:underline"
-            >
-              Open board
-            </Link>
+            <Button asChild variant="outline" size="sm">
+              <Link href={`/community/${board.slug}`}>Open board</Link>
+            </Button>
           </CardContent>
         </Card>
       ))}

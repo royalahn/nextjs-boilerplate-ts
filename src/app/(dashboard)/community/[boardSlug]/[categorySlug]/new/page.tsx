@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import { Header } from "@/components/layout/header"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import { PostForm } from "@/components/community/post-form"
 import { createPost } from "@/app/(dashboard)/community/actions"
 import { getCommunityCategory, requireCommunityUser } from "@/lib/community"
@@ -23,9 +24,14 @@ export default async function NewPostPage({ params }: NewPostPageProps) {
     <div className="flex flex-col">
       <Header title={`New post · ${data.board.name}`} />
       <div className="p-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Write a new post</CardTitle>
+        <Card className="border-black/10 bg-[#fff9df]">
+          <CardHeader className="space-y-3">
+            <Badge variant="secondary" className="w-fit">
+              New post
+            </Badge>
+            <CardTitle className="text-2xl tracking-tight">
+              Write a new post
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <PostForm

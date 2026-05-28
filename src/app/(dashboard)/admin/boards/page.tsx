@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation"
 import { Header } from "@/components/layout/header"
+import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { BoardForm } from "@/components/admin/board-form"
@@ -38,9 +39,14 @@ export default async function AdminBoardsPage() {
     <div className="flex flex-col">
       <Header title="Board Admin" />
       <div className="space-y-6 p-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Create board</CardTitle>
+        <Card className="border-black/10 bg-[#fff9df]">
+          <CardHeader className="space-y-2">
+            <Badge variant="secondary" className="w-fit">
+              Admin controls
+            </Badge>
+            <CardTitle className="text-2xl tracking-tight">
+              Create board
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <BoardForm
@@ -52,11 +58,13 @@ export default async function AdminBoardsPage() {
         </Card>
 
         <section className="space-y-4">
-          <h2 className="text-sm font-semibold">Existing boards</h2>
+          <h2 className="text-sm font-semibold tracking-tight">
+            Existing boards
+          </h2>
           {boards.length > 0 ? (
             <div className="space-y-4">
               {boards.map((board) => (
-                <Card key={board.id}>
+                <Card key={board.id} className="border-black/10 bg-white">
                   <CardHeader className="space-y-2">
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div>
@@ -86,7 +94,9 @@ export default async function AdminBoardsPage() {
                     </form>
 
                     <div className="space-y-3">
-                      <h3 className="text-sm font-semibold">Categories</h3>
+                      <h3 className="text-sm font-semibold tracking-tight">
+                        Categories
+                      </h3>
                       <CategoryForm
                         action={createCategory.bind(null, board.id)}
                         submitLabel="Add category"
@@ -95,7 +105,10 @@ export default async function AdminBoardsPage() {
                       {board.categories.length > 0 ? (
                         <div className="space-y-3">
                           {board.categories.map((category) => (
-                            <Card key={category.id} className="border-dashed">
+                            <Card
+                              key={category.id}
+                              className="border-dashed border-black/10 bg-black/[0.015]"
+                            >
                               <CardContent className="space-y-4 pt-6">
                                 <CategoryForm
                                   action={updateCategory.bind(

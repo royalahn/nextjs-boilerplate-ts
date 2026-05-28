@@ -32,7 +32,7 @@ export function PostPreview({ post, href }: PostPreviewProps) {
   )
 
   return (
-    <Card>
+    <Card className="border-black/10 bg-white">
       <CardHeader className="space-y-2">
         <div className="flex items-start justify-between gap-3">
           <CardTitle className="text-base">{title}</CardTitle>

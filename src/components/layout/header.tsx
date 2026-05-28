@@ -19,12 +19,17 @@ export async function Header({ title }: HeaderProps) {
   const user = session?.user
 
   return (
-    <header className="flex h-14 items-center justify-between border-b bg-background px-6">
-      <h1 className="text-sm font-semibold">{title}</h1>
+    <header className="flex h-16 items-center justify-between border-b border-black/10 bg-white/80 px-6 backdrop-blur">
+      <div className="space-y-0.5">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          Workspace
+        </p>
+        <h1 className="text-sm font-semibold tracking-tight">{title}</h1>
+      </div>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0">
+          <Button variant="ghost" className="relative h-9 w-9 rounded-full p-0">
             <Avatar className="h-8 w-8">
               <AvatarImage
                 src={user?.image ?? undefined}

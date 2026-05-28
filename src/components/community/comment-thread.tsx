@@ -52,7 +52,7 @@ export function CommentThread({
   )
 
   return (
-    <Card>
+    <Card className="border-black/10 bg-white">
       <CardHeader className="space-y-2">
         <div className="flex items-center justify-between gap-3">
           <p className="text-sm font-medium">{comment.author.name ?? "Anonymous"}</p>
@@ -63,7 +63,7 @@ export function CommentThread({
             }).format(comment.createdAt)}
           </p>
         </div>
-        <p className="text-sm text-foreground">{comment.content}</p>
+        <p className="text-sm leading-6 text-foreground">{comment.content}</p>
       </CardHeader>
       <CardContent className="space-y-4">
         <LikeButton
@@ -73,7 +73,7 @@ export function CommentThread({
           label="comment"
         />
 
-        <div className="ml-4 border-l pl-4">
+        <div className="ml-2 border-l border-black/10 pl-4">
           <CommentForm
             action={createReply.bind(
               null,
@@ -89,9 +89,9 @@ export function CommentThread({
         </div>
 
         {comment.replies.length > 0 ? (
-          <div className="space-y-3 border-l pl-4">
+          <div className="space-y-3 border-l border-black/10 pl-4">
             {comment.replies.map((reply) => (
-              <Card key={reply.id} className="border-muted">
+              <Card key={reply.id} className="border-black/10 bg-[#fafafa]">
                 <CardHeader className="space-y-2">
                   <div className="flex items-center justify-between gap-3">
                     <p className="text-sm font-medium">
@@ -104,7 +104,9 @@ export function CommentThread({
                       }).format(reply.createdAt)}
                     </p>
                   </div>
-                  <p className="text-sm text-foreground">{reply.content}</p>
+                  <p className="text-sm leading-6 text-foreground">
+                    {reply.content}
+                  </p>
                 </CardHeader>
                 <CardContent>
                   <LikeButton

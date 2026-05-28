@@ -6,6 +6,7 @@ import { CommentThread } from "@/components/community/comment-thread"
 import { LikeButton } from "@/components/community/like-button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import {
   createComment,
   togglePostLike,
@@ -47,10 +48,10 @@ export default async function PostPage({ params }: PostPageProps) {
           </Link>
         </div>
 
-        <Card>
+        <Card className="border-black/10 bg-white shadow-[0_12px_32px_-4px_rgba(5,0,56,0.08)]">
           <CardHeader className="space-y-3">
             <div className="flex items-start justify-between gap-3">
-              <CardTitle className="text-2xl">{post.title}</CardTitle>
+              <CardTitle className="text-2xl tracking-tight">{post.title}</CardTitle>
               <div className="flex flex-wrap gap-2">
                 <Badge variant="secondary">{post._count.comments} comments</Badge>
                 <Badge variant="outline">{post._count.likes} likes</Badge>
@@ -78,9 +79,11 @@ export default async function PostPage({ params }: PostPageProps) {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-black/10 bg-[#fff9df]">
           <CardHeader>
-            <CardTitle className="text-lg">Leave a comment</CardTitle>
+            <CardTitle className="text-lg tracking-tight">
+              Leave a comment
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <CommentForm
@@ -98,7 +101,14 @@ export default async function PostPage({ params }: PostPageProps) {
         </Card>
 
         <section className="space-y-3">
-          <h2 className="text-sm font-semibold">Comments</h2>
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-sm font-semibold tracking-tight">Comments</h2>
+            <Button asChild variant="outline" size="sm">
+              <Link href={`/community/${board.slug}/${category.slug}`}>
+                Back to category
+              </Link>
+            </Button>
+          </div>
           {comments.length > 0 ? (
             <div className="space-y-4">
               {comments.map((comment) => (
@@ -113,7 +123,7 @@ export default async function PostPage({ params }: PostPageProps) {
               ))}
             </div>
           ) : (
-            <Card>
+            <Card className="border-black/10 bg-white">
               <CardContent className="py-12 text-center text-sm text-muted-foreground">
                 No comments yet. Be the first to join the conversation.
               </CardContent>

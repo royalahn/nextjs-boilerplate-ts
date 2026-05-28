@@ -27,10 +27,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     <div className="flex flex-col">
       <Header title={`${board.name} / ${category.name}`} />
       <div className="space-y-6 p-6">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-xl">{category.name}</CardTitle>
-            <p className="text-sm text-muted-foreground">
+        <Card className="border-black/10 bg-[#fff9df]">
+          <CardHeader className="space-y-3">
+            <Badge variant="secondary" className="w-fit">
+              Category view
+            </Badge>
+            <CardTitle className="text-2xl tracking-tight">
+              {category.name}
+            </CardTitle>
+            <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
               {board.description ?? "No description yet."}
             </p>
           </CardHeader>
@@ -43,7 +48,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
         <section className="space-y-3">
           <div className="flex items-center justify-between gap-3">
-            <h2 className="text-sm font-semibold">Posts</h2>
+            <h2 className="text-sm font-semibold tracking-tight">Posts</h2>
             <Button asChild size="sm">
               <Link href={`/community/${board.slug}/${category.slug}/new`}>
                 Write a post
@@ -61,7 +66,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               ))}
             </div>
           ) : (
-            <Card>
+            <Card className="border-black/10 bg-white">
               <CardContent className="space-y-4 py-12 text-center text-sm text-muted-foreground">
                 <p>No posts in this category yet.</p>
                 <Button asChild>
