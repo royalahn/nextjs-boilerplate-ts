@@ -10,6 +10,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/login",
   },
   callbacks: {
+    session({ session, user }) {
+      session.user.id = user.id
+      return session
+    },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user
       const isDashboard = nextUrl.pathname.startsWith("/dashboard")
