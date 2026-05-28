@@ -26,6 +26,7 @@ cp .env.example .env
 `.env` 파일에서 다음 값을 채웁니다:
 
 ```env
+DATABASE_URL="postgresql://postgres:password@localhost:5432/myapp"
 AUTH_SECRET=""        # openssl rand -base64 32
 AUTH_GOOGLE_ID=""     # Google Cloud Console에서 발급
 AUTH_GOOGLE_SECRET="" # Google Cloud Console에서 발급
@@ -78,10 +79,13 @@ src/
 ├── components/
 │   ├── ui/                    # shadcn 컴포넌트
 │   └── layout/                # Sidebar, Header
-└── lib/
-    ├── auth.ts                # Auth.js 설정
-    ├── db.ts                  # Prisma 싱글턴
-    └── utils.ts               # cn() 유틸
+├── lib/
+│   ├── auth.ts                # Auth.js 설정
+│   ├── db.ts                  # Prisma 싱글턴
+│   └── utils.ts               # cn() 유틸
+├── types/
+│   └── next-auth.d.ts         # Auth.js 타입 확장
+└── proxy.ts                    # 인증 라우트 보호
 prisma/schema.prisma           # DB 스키마
 Dockerfile                     # 멀티스테이지 빌드
 docker-compose.yml             # 개발 (DB만)
