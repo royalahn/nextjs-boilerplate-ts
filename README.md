@@ -31,6 +31,7 @@ AUTH_SECRET=""        # openssl rand -base64 32
 AUTH_GOOGLE_ID=""     # Google Cloud Console에서 발급
 AUTH_GOOGLE_SECRET="" # Google Cloud Console에서 발급
 AUTH_URL="http://localhost:3000"
+ADMIN_EMAILS=""       # comma-separated admin emails
 ```
 
 > Google OAuth 설정 시 승인된 리디렉션 URI: `http://localhost:3000/api/auth/callback/google`

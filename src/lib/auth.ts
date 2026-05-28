@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { db } from "@/lib/db"
+import { resolveAdminRole } from "@/lib/admin"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(db),
@@ -12,6 +13,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     session({ session, user }) {
       session.user.id = user.id
+      session.user.role = resolveAdminRole(user.email)
       return session
     },
     authorized({ auth, request: { nextUrl } }) {
@@ -22,6 +24,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return false
       }
       return true
+    },
+  },
+  events: {
+    async signIn({ user }) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { role: resolveAdminRole(user.email) },
+      })
     },
   },
 })
