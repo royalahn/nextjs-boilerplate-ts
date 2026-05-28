@@ -1,3 +1,4 @@
+import { AuthorAvatar } from "@/components/community/author-avatar"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { CommentForm } from "@/components/community/comment-form"
 import { LikeButton } from "@/components/community/like-button"
@@ -9,6 +10,7 @@ type CommentReply = {
   createdAt: Date
   author: {
     name: string | null
+    image?: string | null
   }
   likes: Array<{
     userId: string
@@ -21,6 +23,7 @@ export type CommentThreadItem = {
   createdAt: Date
   author: {
     name: string | null
+    image?: string | null
   }
   likes: Array<{
     userId: string
@@ -52,10 +55,18 @@ export function CommentThread({
   )
 
   return (
-    <Card className="border-black/10 bg-white">
-      <CardHeader className="space-y-2">
-        <div className="flex items-center justify-between gap-3">
-          <p className="text-sm font-medium">{comment.author.name ?? "Anonymous"}</p>
+      <Card className="border-black/10 bg-white">
+        <CardHeader className="space-y-2">
+          <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <AuthorAvatar
+              name={comment.author.name}
+              image={comment.author.image}
+              size="sm"
+              className="h-7 w-7"
+            />
+            <p className="text-sm font-medium">{comment.author.name ?? "Anonymous"}</p>
+          </div>
           <p className="text-xs text-muted-foreground">
             {new Intl.DateTimeFormat("en", {
               dateStyle: "medium",
@@ -94,9 +105,17 @@ export function CommentThread({
               <Card key={reply.id} className="border-black/10 bg-[#fafafa]">
                 <CardHeader className="space-y-2">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-medium">
-                      {reply.author.name ?? "Anonymous"}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <AuthorAvatar
+                        name={reply.author.name}
+                        image={reply.author.image}
+                        size="sm"
+                        className="h-6 w-6"
+                      />
+                      <p className="text-sm font-medium">
+                        {reply.author.name ?? "Anonymous"}
+                      </p>
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       {new Intl.DateTimeFormat("en", {
                         dateStyle: "medium",

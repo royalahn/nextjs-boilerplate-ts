@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { AuthorAvatar } from "@/components/community/author-avatar"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
@@ -9,6 +10,7 @@ type PostPreviewItem = {
   createdAt: Date
   author: {
     name: string | null
+    image?: string | null
   }
   category?: {
     name: string
@@ -65,7 +67,16 @@ export function PostPreview({ post, category, href }: PostPreviewProps) {
           </div>
         </div>
         <p className="text-xs text-muted-foreground">
-          {post.author.name ?? "Anonymous"} ·{" "}
+          <span className="inline-flex items-center gap-2">
+            <AuthorAvatar
+              name={post.author.name}
+              image={post.author.image}
+              size="sm"
+              className="h-5 w-5"
+            />
+            <span>{post.author.name ?? "Anonymous"}</span>
+          </span>
+          {" · "}
           {new Intl.DateTimeFormat("en", {
             dateStyle: "medium",
           }).format(post.createdAt)}

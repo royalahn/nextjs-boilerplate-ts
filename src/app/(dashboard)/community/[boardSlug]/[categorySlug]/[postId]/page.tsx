@@ -7,6 +7,7 @@ import { LikeButton } from "@/components/community/like-button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { AuthorAvatar } from "@/components/community/author-avatar"
 import {
   createComment,
   togglePostLike,
@@ -88,13 +89,21 @@ export default async function PostPage({ params }: PostPageProps) {
                 </Badge>
               </div>
             </div>
-            <p className="text-sm text-muted-foreground">
-              By {post.author.name ?? "Anonymous"} ·{" "}
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <AuthorAvatar
+                name={post.author.name}
+                image={post.author.image}
+                size="sm"
+                className="h-6 w-6"
+              />
+              <span>
+                By {post.author.name ?? "Anonymous"} ·{" "}
               {new Intl.DateTimeFormat("en", {
                 dateStyle: "medium",
                 timeStyle: "short",
               }).format(post.createdAt)}
-            </p>
+              </span>
+            </div>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="whitespace-pre-wrap text-sm leading-6 text-foreground">
