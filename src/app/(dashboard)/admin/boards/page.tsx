@@ -42,6 +42,7 @@ export default async function AdminBoardsPage() {
         <Card className="border-black/10 bg-[#fff9df]">
           <CardHeader className="space-y-2">
             <Badge variant="secondary" className="w-fit">
+              <i className="fa-solid fa-screwdriver-wrench mr-2 text-[#ff9f6e]" />
               Admin controls
             </Badge>
             <CardTitle className="text-2xl tracking-tight">
@@ -89,6 +90,7 @@ export default async function AdminBoardsPage() {
                     />
                     <form action={deleteBoard.bind(null, board.id)}>
                       <Button type="submit" variant="destructive" size="sm">
+                        <i className="fa-solid fa-trash" aria-hidden="true" />
                         Delete board
                       </Button>
                     </form>
@@ -130,6 +132,7 @@ export default async function AdminBoardsPage() {
                                     variant="destructive"
                                     size="sm"
                                   >
+                                    <i className="fa-solid fa-trash" aria-hidden="true" />
                                     Delete category
                                   </Button>
                                 </form>

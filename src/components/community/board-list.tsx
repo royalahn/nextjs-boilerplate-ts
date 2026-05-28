@@ -26,7 +26,7 @@ export function BoardList({ boards }: BoardListProps) {
   const tints = ["bg-[#fff6c7]", "bg-[#dff6f1]", "bg-[#ffe5de]", "bg-[#f4ecff]"]
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+    <div className="mx-auto grid w-full max-w-5xl gap-4 md:grid-cols-2 xl:grid-cols-3">
       {boards.map((board, index) => (
         <Card
           key={board.id}
@@ -47,12 +47,16 @@ export function BoardList({ boards }: BoardListProps) {
             <div className="flex flex-wrap gap-2">
               {board.categories.map((category) => (
                 <Badge key={category.id} variant="outline">
+                  <i className="fa-regular fa-folder mr-1" aria-hidden="true" />
                   {category.name}
                 </Badge>
               ))}
             </div>
             <Button asChild variant="outline" size="sm">
-              <Link href={`/community/${board.slug}`}>Open board</Link>
+              <Link href={`/community/${board.slug}`}>
+                <i className="fa-solid fa-arrow-right" aria-hidden="true" />
+                Open board
+              </Link>
             </Button>
           </CardContent>
         </Card>

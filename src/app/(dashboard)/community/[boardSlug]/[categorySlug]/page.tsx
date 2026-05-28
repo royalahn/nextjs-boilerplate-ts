@@ -26,10 +26,11 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   return (
     <div className="flex flex-col">
       <Header title={`${board.name} / ${category.name}`} />
-      <div className="space-y-6 p-6">
+      <div className="mx-auto w-full max-w-4xl space-y-6 p-6">
         <Card className="border-black/10 bg-[#fff9df]">
           <CardHeader className="space-y-3">
             <Badge variant="secondary" className="w-fit">
+              <i className="fa-solid fa-layer-group mr-2 text-[#ff9f6e]" />
               Category view
             </Badge>
             <CardTitle className="text-2xl tracking-tight">
@@ -41,7 +42,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2">
             <Link href={`/community/${board.slug}`}>
-              <Badge variant="secondary">{board.name}</Badge>
+              <Badge variant="secondary">
+                <i className="fa-solid fa-table-columns mr-2 text-black/60" />
+                {board.name}
+              </Badge>
             </Link>
           </CardContent>
         </Card>
@@ -51,6 +55,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             <h2 className="text-sm font-semibold tracking-tight">Posts</h2>
             <Button asChild size="sm">
               <Link href={`/community/${board.slug}/${category.slug}/new`}>
+                <i className="fa-solid fa-pen-to-square" aria-hidden="true" />
                 Write a post
               </Link>
             </Button>
@@ -71,6 +76,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 <p>No posts in this category yet.</p>
                 <Button asChild>
                   <Link href={`/community/${board.slug}/${category.slug}/new`}>
+                    <i className="fa-solid fa-plus" aria-hidden="true" />
                     Write the first post
                   </Link>
                 </Button>

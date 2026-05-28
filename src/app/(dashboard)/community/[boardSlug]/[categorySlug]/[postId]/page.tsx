@@ -39,9 +39,12 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <div className="flex flex-col">
       <Header title={post.title} />
-      <div className="space-y-6 p-6">
+      <div className="mx-auto w-full max-w-4xl space-y-6 p-6">
         <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-          <Link href={`/community/${board.slug}`}>{board.name}</Link>
+          <Link href={`/community/${board.slug}`}>
+            <i className="fa-solid fa-table-columns mr-2" aria-hidden="true" />
+            {board.name}
+          </Link>
           <span>/</span>
           <Link href={`/community/${board.slug}/${category.slug}`}>
             {category.name}
@@ -53,9 +56,18 @@ export default async function PostPage({ params }: PostPageProps) {
             <div className="flex items-start justify-between gap-3">
               <CardTitle className="text-2xl tracking-tight">{post.title}</CardTitle>
               <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary">{post._count.comments} comments</Badge>
-                <Badge variant="outline">{post._count.likes} likes</Badge>
-                <Badge variant="outline">{post._count.media} attachments</Badge>
+                <Badge variant="secondary">
+                  <i className="fa-regular fa-comment-dots mr-2" />
+                  {post._count.comments} comments
+                </Badge>
+                <Badge variant="outline">
+                  <i className="fa-regular fa-heart mr-2" />
+                  {post._count.likes} likes
+                </Badge>
+                <Badge variant="outline">
+                  <i className="fa-regular fa-image mr-2" />
+                  {post._count.media} attachments
+                </Badge>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -82,6 +94,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <Card className="border-black/10 bg-[#fff9df]">
           <CardHeader>
             <CardTitle className="text-lg tracking-tight">
+              <i className="fa-regular fa-comment-dots mr-2 text-[#5dd8c7]" />
               Leave a comment
             </CardTitle>
           </CardHeader>
@@ -105,6 +118,7 @@ export default async function PostPage({ params }: PostPageProps) {
             <h2 className="text-sm font-semibold tracking-tight">Comments</h2>
             <Button asChild variant="outline" size="sm">
               <Link href={`/community/${board.slug}/${category.slug}`}>
+                <i className="fa-solid fa-arrow-left" aria-hidden="true" />
                 Back to category
               </Link>
             </Button>
@@ -124,7 +138,8 @@ export default async function PostPage({ params }: PostPageProps) {
             </div>
           ) : (
             <Card className="border-black/10 bg-white">
-              <CardContent className="py-12 text-center text-sm text-muted-foreground">
+              <CardContent className="space-y-4 py-12 text-center text-sm text-muted-foreground">
+                <i className="fa-regular fa-comment-dots text-2xl text-black/40" />
                 No comments yet. Be the first to join the conversation.
               </CardContent>
             </Card>

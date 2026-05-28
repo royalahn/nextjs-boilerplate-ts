@@ -30,6 +30,7 @@ export function CommentForm({
       </div>
 
       <Button type="submit" size="sm">
+        <i className="fa-solid fa-reply" aria-hidden="true" />
         {submitLabel}
       </Button>
     </form>

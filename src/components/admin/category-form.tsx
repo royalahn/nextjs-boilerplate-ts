@@ -40,7 +40,10 @@ export function CategoryForm({
           defaultValue={defaultSortOrder}
         />
       </div>
-      <Button type="submit">{submitLabel}</Button>
+      <Button type="submit">
+        <i className="fa-solid fa-layer-group" aria-hidden="true" />
+        {submitLabel}
+      </Button>
     </form>
   )
 }

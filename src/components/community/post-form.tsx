@@ -37,7 +37,10 @@ export function PostForm({
         Image attachments are planned, but upload support is not wired up yet.
       </p>
 
-      <Button type="submit">{submitLabel}</Button>
+      <Button type="submit">
+        <i className="fa-solid fa-paper-plane" aria-hidden="true" />
+        {submitLabel}
+      </Button>
     </form>
   )
 }

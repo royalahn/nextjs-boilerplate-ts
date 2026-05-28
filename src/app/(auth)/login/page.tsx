@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { WorkspaceIllustration } from "@/components/visuals/workspace-illustrations"
 
 export default async function LoginPage() {
   const session = await auth()
@@ -84,7 +85,10 @@ export default async function LoginPage() {
           <Card className="relative overflow-hidden border-black/10 bg-white shadow-[0_12px_32px_-4px_rgba(5,0,56,0.08)]">
             <CardHeader className="space-y-3 border-b border-black/5 bg-black/[0.02]">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg">Board snapshot</CardTitle>
+                <CardTitle className="text-lg">
+                  <i className="fa-solid fa-wand-magic-sparkles mr-2 text-[#f7d842]" />
+                  Board snapshot
+                </CardTitle>
                 <span className="rounded-full bg-[#f7d842] px-3 py-1 text-xs font-semibold text-black">
                   Live
                 </span>
@@ -94,41 +98,35 @@ export default async function LoginPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4 p-6">
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="rounded-[28px] border border-black/10 bg-[#fff6c7] p-4">
-                  <p className="text-sm font-medium text-black">Sticky notes</p>
-                  <p className="mt-2 text-sm text-black/70">
-                    Quick ideas, lightweight comments, and board-level context.
-                  </p>
-                </div>
-                <div className="rounded-[28px] border border-black/10 bg-[#dff6f1] p-4">
-                  <p className="text-sm font-medium text-black">Threaded replies</p>
-                  <p className="mt-2 text-sm text-black/70">
-                    Keep conversations nested and easy to scan.
-                  </p>
-                </div>
-              </div>
+              <WorkspaceIllustration variant="hero" className="shadow-[0_18px_40px_-10px_rgba(5,0,56,0.14)]" />
 
               <div className="rounded-[28px] border border-black/10 bg-white p-4 shadow-[0_1px_2px_rgba(5,0,56,0.04)]">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-black">Community board</p>
+                    <p className="text-sm font-medium text-black">
+                      <i className="fa-solid fa-comment-dots mr-2 text-[#5dd8c7]" />
+                      Community board
+                    </p>
                     <p className="text-xs text-muted-foreground">
                       Product ideas · 12 posts
                     </p>
                   </div>
                   <Button variant="yellow" size="sm">
+                    <i className="fa-solid fa-arrow-right" aria-hidden="true" />
                     Ask a question
                   </Button>
                 </div>
                 <div className="mt-4 grid gap-2 sm:grid-cols-3">
                   <div className="rounded-2xl bg-[#fff6c7] p-3 text-xs text-black/75">
+                    <i className="fa-regular fa-note-sticky mr-2" />
                     Quick feedback
                   </div>
                   <div className="rounded-2xl bg-[#ffe5de] p-3 text-xs text-black/75">
+                    <i className="fa-solid fa-bolt mr-2" />
                     Feature request
                   </div>
                   <div className="rounded-2xl bg-[#dff6f1] p-3 text-xs text-black/75">
+                    <i className="fa-solid fa-wave-square mr-2" />
                     Release notes
                   </div>
                 </div>

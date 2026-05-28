@@ -22,6 +22,7 @@ export async function Header({ title }: HeaderProps) {
     <header className="flex h-16 items-center justify-between border-b border-black/10 bg-white/80 px-6 backdrop-blur">
       <div className="space-y-0.5">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <i className="fa-solid fa-compass mr-2 text-[#f7d842]" />
           Workspace
         </p>
         <h1 className="text-sm font-semibold tracking-tight">{title}</h1>
@@ -44,7 +45,10 @@ export async function Header({ title }: HeaderProps) {
         <DropdownMenuContent className="w-56" align="end">
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium">{user?.name}</p>
+              <p className="text-sm font-medium">
+                <i className="fa-solid fa-circle-user mr-2 text-black/50" />
+                {user?.name}
+              </p>
               <p className="text-xs text-muted-foreground">{user?.email}</p>
             </div>
           </DropdownMenuLabel>
@@ -61,6 +65,7 @@ export async function Header({ title }: HeaderProps) {
                 type="submit"
                 className="w-full cursor-pointer px-2 py-1.5 text-left text-sm"
               >
+                <i className="fa-solid fa-right-from-bracket mr-2 text-black/50" />
                 Sign out
               </button>
             </form>

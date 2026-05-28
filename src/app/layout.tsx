@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
+import { AmbientGlow } from "@/components/visuals/ambient-glow"
 
 export const metadata: Metadata = {
   title: "My App",
@@ -30,7 +31,8 @@ export default function RootLayout({
           referrerPolicy="no-referrer"
         />
       </head>
-      <body className="antialiased">
+      <body className="relative overflow-x-hidden antialiased">
+        <AmbientGlow />
         {children}
         <Toaster />
       </body>

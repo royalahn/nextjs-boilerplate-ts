@@ -23,7 +23,7 @@ export default async function BoardPage({ params }: BoardPageProps) {
   return (
     <div className="flex flex-col">
       <Header title={board.name} />
-      <div className="space-y-6 p-6">
+      <div className="mx-auto w-full max-w-5xl space-y-6 p-6">
         <Card className="border-black/10 bg-[#fff9df]">
           <CardHeader className="space-y-3">
             <Badge variant="secondary" className="w-fit">
@@ -53,6 +53,7 @@ export default async function BoardPage({ params }: BoardPageProps) {
                 <PostPreview
                   key={post.id}
                   post={post}
+                  category={post.category}
                   href={`/community/${board.slug}/${post.category.slug}/${post.id}`}
                 />
               ))}
