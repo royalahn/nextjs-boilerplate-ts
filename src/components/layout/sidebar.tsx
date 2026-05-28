@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { signOut } from "next-auth/react"
-import { LayoutDashboard, LogOut } from "lucide-react"
+import { LayoutDashboard, LogOut, MessageSquare } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils"
 
 const navItems = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Community", href: "/community", icon: MessageSquare },
 ]
 
 interface SidebarProps {
