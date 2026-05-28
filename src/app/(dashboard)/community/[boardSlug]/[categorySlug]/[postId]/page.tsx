@@ -54,7 +54,25 @@ export default async function PostPage({ params }: PostPageProps) {
         <Card className="border-black/10 bg-white shadow-[0_12px_32px_-4px_rgba(5,0,56,0.08)]">
           <CardHeader className="space-y-3">
             <div className="flex items-start justify-between gap-3">
-              <CardTitle className="text-2xl tracking-tight">{post.title}</CardTitle>
+              <div className="space-y-3">
+                <div className="flex flex-wrap gap-2">
+                  <Badge
+                    variant="secondary"
+                    className="border border-black/10 bg-[#f4ecff] text-black"
+                  >
+                    <i className="fa-regular fa-folder mr-2" />
+                    {category.name}
+                  </Badge>
+                  <Badge
+                    variant="outline"
+                    className="border-black/10 bg-white text-black"
+                  >
+                    <i className="fa-solid fa-table-columns mr-2" />
+                    {board.name}
+                  </Badge>
+                </div>
+                <CardTitle className="text-2xl tracking-tight">{post.title}</CardTitle>
+              </div>
               <div className="flex flex-wrap gap-2">
                 <Badge variant="secondary">
                   <i className="fa-regular fa-comment-dots mr-2" />

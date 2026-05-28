@@ -43,7 +43,10 @@ export function PostPreview({ post, category, href }: PostPreviewProps) {
         <div className="flex items-start justify-between gap-3">
           <div className="space-y-2">
             {resolvedCategory ? (
-              <Badge variant="secondary" className="w-fit">
+              <Badge
+                variant="secondary"
+                className="w-fit border border-black/10 bg-[#f4ecff] text-black"
+              >
                 <i className="fa-regular fa-folder mr-1" />
                 {resolvedCategory.name}
               </Badge>
